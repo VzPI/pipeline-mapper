@@ -1,0 +1,29 @@
+{
+  "name": "mmsc_vlp",
+  "version": "1.0.0",
+  "description": "Map/navigation tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/mmsctedc/mmsc_vlp.git"
+  },
+  "author": "Darren Klein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/mmsctedc/mmsc_vlp/issues"
+  },
+  "homepage": "https://gitlab.com/mmsctedc/mmsc_vlp#README",
+  "devDependencies": {
+    "eslint": "^4.7.2",
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "browserify": "^14.4.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4"
+  }
+}
