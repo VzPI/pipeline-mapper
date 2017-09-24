@@ -4,7 +4,7 @@
   "description": "Map/navigation tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "bootstrap": "^3.3.7",
     "browserify": "^14.4.0",
     "ejs": "^2.5.7",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "leaflet": "^1.2.0"
   }
 }
