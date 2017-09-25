@@ -1,0 +1,6 @@
+{
+	"ignore": ["public/scripts/bundle.js"],
+	"events": {
+		"exit": "npm run lint && npm run bundle"
+	}
+}

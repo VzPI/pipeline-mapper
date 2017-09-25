@@ -4,7 +4,11 @@
   "description": "Map/navigation tool",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon"
+    "bundle": "./node_modules/browserify/bin/cmd.js build/main.js -o public/scripts/bundle.js",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "npm run lint && npm run bundle && nodemon",
+    "start:prod": "node index.js",
+    "lint": "eslint ./build/*.js ./*.js || exit 0"
   },
   "repository": {
     "type": "git",
@@ -17,6 +21,7 @@
   },
   "homepage": "https://gitlab.com/mmsctedc/mmsc_vlp#README",
   "devDependencies": {
+    "babel-eslint": "^8.0.0",
     "eslint": "^4.7.2",
     "nodemon": "^1.12.1"
   },
@@ -25,6 +30,11 @@
     "browserify": "^14.4.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
+    "if-env": "^1.0.0",
     "leaflet": "^1.2.0"
+  },
+  "engines": {
+    "node": "6.11.1",
+    "npm": "4.0.5"
   }
 }
