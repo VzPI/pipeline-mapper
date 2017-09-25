@@ -1,7 +1,9 @@
 const express = require("express"),
 	app = express(),
+	compression = require("compression"),
 	port = process.env.PORT || 3000
 
+app.use(compression())
 app.use(express.static("public"))
 app.set("view engine", "ejs")
 app.use("/stylesheets", express.static(__dirname + "/node_modules/bootstrap/dist/css")) // eslint-disable-line prefer-template
