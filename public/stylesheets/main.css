@@ -4,4 +4,12 @@ html, body {
 
 #map {
 	height: 100%;
+	z-index: 0;
+}
+
+#watch-position {
+	position: absolute;
+	z-index: 1;
+	bottom: 15vh;
+	left: 5vw;
 }
