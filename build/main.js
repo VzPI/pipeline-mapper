@@ -1,5 +1,6 @@
 // THIS IS OUR CORE JS FILE, WHICH IS BUNDLED TO public/scripts/bundle.js
 require("leaflet")
+require("leaflet-pulse-icon")
 const mapData = require("./map_data.js"),
 	map = L.map("map", {"zoomControl": false}).setView([41.384660, -74.473034], 12),
 	watchPositionButton = document.getElementById("watch-position"),
@@ -10,6 +11,8 @@ const mapData = require("./map_data.js"),
 
 		map.setView(new L.LatLng(latitude, longitude))
 		map.setZoom(19)
+		L.marker([latitude, longitude], {"icon": L.icon.pulse()}).addTo(map)
+		L.circle([latitude, longitude], accuracy).addTo(map)
 	},
 	error = (err) => {
 		alert(`Error ${err.code}: ${err.message}`)
