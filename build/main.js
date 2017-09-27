@@ -10,7 +10,8 @@ const mapData = require("./map_data.js"),
 	updateMarkerAndRadius = (latitude, longitude, accuracy) => {
 		if (marker && radius) {
 			marker.setLatLng([latitude, longitude])
-			radius.setLatLng([latitude, longitude], accuracy)
+			map.removeLayer(radius)
+			radius = L.circle([latitude, longitude], accuracy).addTo(map)
 		} else {
 			marker = L.marker([latitude, longitude], {"icon": icon}).addTo(map)
 			radius = L.circle([latitude, longitude], accuracy).addTo(map)
@@ -37,7 +38,7 @@ mapData.addTo(map)
 watchPositionButton.addEventListener("click", () => {
 	navigator.geolocation.watchPosition(success, error, {
 		"maximumAge": 0, // DO NOT USE A CACHED POSITION, RETRIEVE CURRENT REAL POSITION
-		"timeout": Infinity, // DO NOT RETURN UNTIL THE POSITION IS AVAILABLE
+		"timeout": 50000, // WHY ISN'T Infinity WORKING? ON MOBILE, IT KEEPS ALERTING.
 		"enableHighAccuracy": true
 	})
 	map.setZoom(19)
