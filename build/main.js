@@ -10,7 +10,6 @@ const mapData = require("./map_data.js"),
 	icon = L.icon.pulse(),
 	watchPositionButton = document.getElementById("watch-position"),
 	clearWatch = (watchPosition) => {
-		isWatching = false
 		map.removeLayer(marker)
 		map.removeLayer(radius)
 		return window.navigator.geolocation.clearWatch(watchPosition)
@@ -33,7 +32,6 @@ const mapData = require("./map_data.js"),
 			longitude = position.coords.longitude,
 			accuracy = position.coords.accuracy
 
-		isWatching = true
 		map.setZoom(19)
 		map.setView(new L.LatLng(latitude, longitude))
 		return updateMarkerAndRadius(latitude, longitude, accuracy)
@@ -47,6 +45,7 @@ const mapData = require("./map_data.js"),
 			message = err.message
 		}
 
+		setWatch() // RESET THE UI TO INACTIVE MODE
 		clearWatch(watchPosition) // NOT LIKELY TO BE NECESSARY, BUT CLEANUP JUST IN CASE
 		return alert(`Error ${err.code}: ${message}`)
 	},
@@ -56,7 +55,22 @@ const mapData = require("./map_data.js"),
 			"timeout": 15000, // TRY TO ACCESS LOCATION FOR 15 SECONDS BEFORE THROWING TIMEOUT ERROR
 			"enableHighAccuracy": true
 		})
+
 		return false
+	},
+	// WE ARE DONE WATCHING, SWITCH BACK TO WATCH (INACTIVE) UI
+	setWatch = () => {
+		isWatching = false
+		watchPositionButton.className = "btn btn-info"
+		watchPositionButton.childNodes[1].innerHTML = "Watch"
+		watchPositionButton.childNodes[1].className = "button-text"
+	},
+	// WE ARE WATCHING, SWITCH TO WATCHING (ACTIVE) UI
+	setWatching = () => {
+		isWatching = true
+		watchPositionButton.className = "btn btn-warning"
+		watchPositionButton.childNodes[1].className = "button-text animated flash"
+		watchPositionButton.childNodes[1].innerHTML = "Watching..."
 	}
 
 L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png", {"maxZoom": 21}).addTo(map)
@@ -65,14 +79,10 @@ mapData.addTo(map)
 
 watchPositionButton.addEventListener("click", () => {
 	if (isWatching) {
-		watchPositionButton.className = "btn btn-info"
-		watchPositionButton.childNodes[1].innerHTML = "Watch"
-		watchPositionButton.childNodes[1].className = "button-text"
+		setWatch()
 		clearWatch(watchPosition)
 	} else {
-		watchPositionButton.className = "btn btn-warning"
-		watchPositionButton.childNodes[1].className = "button-text animated flash"
-		watchPositionButton.childNodes[1].innerHTML = "Watching..."
+		setWatching()
 		watch()
 	}
 })
