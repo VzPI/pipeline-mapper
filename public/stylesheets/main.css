@@ -12,4 +12,6 @@ html, body {
 	z-index: 1;
 	bottom: 15vh;
 	left: 5vw;
+	height: 100px;
+	width: 100px;
 }
