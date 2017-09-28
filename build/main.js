@@ -40,17 +40,26 @@ const mapData = require("./map_data.js"),
 		return updateMarkerAndRadius(latitude, longitude, accuracy)
 	},
 	error = (err) => {
-		let message
+		// THERE SEEMS TO BE A BUG WHERE CALLING clearWatch() CONTINUES TO RUN watchPosition()
+		// UNTIL A TIMEOUT ERROR OCCURS, IF success IS NOT CALLED.
+		// USE THIS CONDITIONAL SO THAT A USER IS ONLY NOTIFIED OF ERRORS THAT OCCUR WHILE THEY'RE TRYING TO WATCH THEIR POSITION
+		if (isWatching) {
+			let message
 
-		if (err.code === 3) {
-			message = "Could not get your location - please try again."
-		} else {
-			message = err.message
+			if (err.code === 3) {
+				message = "Could not get your location - please try again."
+			} else {
+				message = err.message
+			}
+
+			setWatch() // RESET THE UI TO INACTIVE MODE
+			clearWatch(watchPosition) // NOT LIKELY TO BE NECESSARY, BUT CLEANUP JUST IN CASE
+			return alert(`Error ${err.code}: ${message}`)
 		}
 
-		setWatch() // RESET THE UI TO INACTIVE MODE
-		clearWatch(watchPosition) // NOT LIKELY TO BE NECESSARY, BUT CLEANUP JUST IN CASE
-		return alert(`Error ${err.code}: ${message}`)
+		// QUIETLY RETURN IN SITUATIONS WHERE WATCHING MAY HAVE BEEN CANCELLED BEFORE
+		// success CALLBACK IS RETURNED
+		return false
 	},
 	watch = () => {
 		watchPosition = navigator.geolocation.watchPosition(success, error, {
