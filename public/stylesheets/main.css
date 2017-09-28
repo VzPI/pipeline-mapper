@@ -2,6 +2,32 @@ html, body {
 	height: 100%;
 }
 
+.animated { 
+	-webkit-animation-duration: 2.5s; 
+	animation-duration: 2.5s; 
+	-webkit-animation-fill-mode: both; 
+	animation-fill-mode: both; 
+	-webkit-animation-timing-function: ease-in-out; 
+	animation-timing-function: ease-in-out; 
+	animation-iteration-count:infinite; 
+	-webkit-animation-iteration-count:infinite; 
+} 
+
+@-webkit-keyframes flash { 
+	0%, 50%, 100% {opacity: 1;} 
+	25%, 75% {opacity: 0;} 
+} 
+
+@keyframes flash { 
+	0%, 50%, 100% {opacity: 1;} 
+	25%, 75% {opacity: 0;} 
+} 
+
+.flash { 
+	-webkit-animation-name: flash; 
+	animation-name: flash; 
+}
+
 #map {
 	height: 100%;
 	z-index: 0;
@@ -10,8 +36,8 @@ html, body {
 #watch-position {
 	position: absolute;
 	z-index: 1;
-	bottom: 15vh;
+	bottom: 10vh;
 	left: 5vw;
-	height: 100px;
 	width: 100px;
+	height: 40px;
 }

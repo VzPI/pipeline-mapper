@@ -65,8 +65,14 @@ mapData.addTo(map)
 
 watchPositionButton.addEventListener("click", () => {
 	if (isWatching) {
+		watchPositionButton.className = "btn btn-info"
+		watchPositionButton.childNodes[1].innerHTML = "Watch"
+		watchPositionButton.childNodes[1].className = "button-text"
 		clearWatch(watchPosition)
 	} else {
+		watchPositionButton.className = "btn btn-warning"
+		watchPositionButton.childNodes[1].className = "button-text animated flash"
+		watchPositionButton.childNodes[1].innerHTML = "Watching..."
 		watch()
 	}
 })
