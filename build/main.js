@@ -10,8 +10,11 @@ const mapData = require("./map_data.js"),
 	icon = L.icon.pulse(),
 	watchPositionButton = document.getElementById("watch-position"),
 	clearWatch = (watchPosition) => {
-		map.removeLayer(marker)
-		map.removeLayer(radius)
+		if (marker && radius) {
+			map.removeLayer(marker)
+			map.removeLayer(radius)
+		}
+
 		return window.navigator.geolocation.clearWatch(watchPosition)
 	},
 	updateMarkerAndRadius = (latitude, longitude, accuracy) => {
