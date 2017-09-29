@@ -73,14 +73,14 @@ const mapData = require("./map_data.js"),
 	// WE ARE DONE WATCHING, SWITCH BACK TO WATCH (INACTIVE) UI
 	setWatch = () => {
 		isWatching = false
-		watchPositionButton.className = "btn btn-info"
+		watchPositionButton.className = "btn btn-info col-xs-5"
 		watchPositionButton.childNodes[1].innerHTML = "Watch"
 		watchPositionButton.childNodes[1].className = "button-text"
 	},
 	// WE ARE WATCHING, SWITCH TO WATCHING (ACTIVE) UI
 	setWatching = () => {
 		isWatching = true
-		watchPositionButton.className = "btn btn-warning"
+		watchPositionButton.className = "btn btn-warning col-xs-5"
 		watchPositionButton.childNodes[1].className = "button-text animated flash"
 		watchPositionButton.childNodes[1].innerHTML = "Watching..."
 	}

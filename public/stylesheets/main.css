@@ -38,6 +38,6 @@ html, body {
 	z-index: 1;
 	bottom: 10vh;
 	left: 5vw;
-	width: 100px;
+	/*width: 100px;*/
 	height: 40px;
 }
