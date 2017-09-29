@@ -15,7 +15,7 @@ const mapData = require("./map_data.js"),
 			map.removeLayer(radius)
 		}
 
-		return window.navigator.geolocation.clearWatch(watchPosition)
+		return navigator.geolocation.clearWatch(watchPosition)
 	},
 	updateMarkerAndRadius = (latitude, longitude, accuracy) => {
 		if (marker && radius) {
