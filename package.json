@@ -9,7 +9,8 @@
     "start:dev": "npm run lint && npm run bundle && concurrently \"npm run ssl-proxy\" \"nodemon\"",
     "start:prod": "node index.js",
     "ssl-proxy": "local-ssl-proxy --source 3001 --target 3000",
-    "lint": "eslint ./build/*.js ./*.js || exit 0"
+    "lint": "eslint ./build/*.js ./*.js || exit 0",
+    "postinstall": "npm run bundle"
   },
   "repository": {
     "type": "git",
