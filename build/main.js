@@ -4,7 +4,8 @@ require("leaflet-pulse-icon")
 let marker,
 	radius,
 	watchPosition,
-	isWatching = false // USED TO DETERMINE WHETHER OR NOT GEOLOCATION IS CURRENTLY RUNNING
+	isWatching = false, // USED TO DETERMINE WHETHER OR NOT GEOLOCATION IS CURRENTLY RUNNING
+	firstWatch = true // WATCH POSITION WILL RETURN SUCCESS OVER AND OVER - USE THIS VARIABLE TO MAKE SURE VIEW AND ZOOM ARE ONLY SET THE FIRST PASS
 const mapData = require("./map_data.js"),
 	map = L.map("map", {"zoomControl": false}).setView([41.384660, -74.473034], 12),
 	icon = L.icon.pulse(),
@@ -35,8 +36,12 @@ const mapData = require("./map_data.js"),
 			longitude = position.coords.longitude,
 			accuracy = position.coords.accuracy
 
-		map.setZoom(19)
-		map.setView(new L.LatLng(latitude, longitude))
+		if (firstWatch) {
+			map.setZoom(19)
+			map.setView(new L.LatLng(latitude, longitude))
+		}
+
+		firstWatch = false
 		return updateMarkerAndRadius(latitude, longitude, accuracy)
 	},
 	error = (err) => {
@@ -80,6 +85,7 @@ const mapData = require("./map_data.js"),
 	// WE ARE WATCHING, SWITCH TO WATCHING (ACTIVE) UI
 	setWatching = () => {
 		isWatching = true
+		firstWatch = true
 		watchPositionButton.className = "btn btn-warning col-xs-5"
 		watchPositionButton.childNodes[1].className = "button-text animated flash"
 		watchPositionButton.childNodes[1].innerHTML = "Watching..."

@@ -22,3 +22,7 @@ When running on a local development machine, you can test this app on a mobile d
 ##############
 # Deployment #
 ##############
+
+#########
+# Notes #
+#########
