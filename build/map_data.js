@@ -25,7 +25,7 @@ const alignment = require("./geojson_data/alignment.js"),
 		"color": "#FFFFFF",
 		"weight": 1,
 		"opacity": 1,
-		"fillOpacity": 0.8
+		"fillOpacity": 1
 	},
 	mileMarkersLayer = L.geoJson(mileMarkers, {
 		"pointToLayer": (feature, latlng) => {
@@ -58,7 +58,5 @@ function onEachFeature(feature, layer) {
         "click": whenClicked
     })
 }
-
-alignmentLayer.bringToFront()
 
 module.exports = L.layerGroup([alignmentLayer, oneHundredFootGridLayer, roadsLayer, mileMarkersLayer, horizontalDrillingLocationsLayer])

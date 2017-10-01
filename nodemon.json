@@ -1,5 +1,5 @@
 {
-	"ignore": ["public/scripts/bundle.js"],
+	"ignore": ["public/scripts/bundle.js", "public/scripts/bundle.min.js"],
 	"events": {
 		"exit": "npm run lint && npm run bundle && npm run uglify"
 	}
