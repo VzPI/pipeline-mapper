@@ -91,7 +91,7 @@ const mapData = require("./map_data.js"),
 		watchPositionButton.childNodes[1].innerHTML = "Watching..."
 	}
 
-L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png", {"maxZoom": 21}).addTo(map)
+L.tileLayer("", {"maxZoom": 21}).addTo(map)
 L.control.scale({"position": "bottomright"}).addTo(map)
 mapData.addTo(map)
 

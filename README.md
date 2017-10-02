@@ -39,7 +39,6 @@ The package.json file contains a number of scripts intended to improve this app'
 - "browserify" - this script consolidates all of the client-side js into one file, piping build/scripts/main.js into public/scripts/bundle.js.
 - "concat-css" - similar to 'browserify', this script consolidates all of the css dependencies (which are manually listed in the script) into public/stylesheets/bundle.css.
 - "uglify" - calls 'uglifyjs' and 'uglifycss', which minify public/scripts/bundle.js and public/scripts/bundle.css into .../bundle.min.js and .../bundle.min.css, respectively.
-- "cache" - generates an application cache file for offline funcionality, composed of the index.html and minified bundles.
 - "start" - the main app start script - calls 'npm start:dev' or 'npm start:prod', depending on the app's context.
 - "start:dev" - starts the app in development mode, which runs 'lint', 'bundle', and 'uglify', followed by concurrent 'ssl-proxy' and 'nodemon' - 'nodemon' is a local development utility that allows for reloading after changes without restarting the server.
 - "start:prod" - starts the app.
