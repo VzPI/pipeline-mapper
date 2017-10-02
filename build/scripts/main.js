@@ -8,7 +8,10 @@ let marker,
 	firstWatch = true // WATCH POSITION WILL RETURN SUCCESS OVER AND OVER - USE THIS VARIABLE TO MAKE SURE VIEW AND ZOOM ARE ONLY SET THE FIRST PASS
 const mapData = require("./map_data.js"),
 	map = L.map("map", {"zoomControl": false}).setView([41.384660, -74.473034], 12),
-	icon = L.icon.pulse(),
+	icon = L.icon.pulse({
+		"iconSize": [15, 15],
+		"color": "#FFFF49"
+	}),
 	watchPositionButton = document.getElementById("watch-position"),
 	clearWatch = (watchPosition) => {
 		if (marker && radius) {
