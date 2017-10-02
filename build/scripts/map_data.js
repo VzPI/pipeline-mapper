@@ -2,20 +2,21 @@
 const alignment = require("./geojson_data/alignment.js"),
 	alignmentStyle = {
 		"color": "#FF4000",
-		"opacity": "1.0",
+		"opacity": 1,
 		"interactive": false
 	},
 	alignmentLayer = L.geoJson(alignment, {"style": alignmentStyle}),
 	oneHundredFootGrid = require("./geojson_data/one_hundred_foot_grid.js"),
 	oneHundredFootGridStyle = {
 		"color": "#889494",
+		"opacity": 0.4,
 		"interactive": false
 	},
 	oneHundredFootGridLayer = L.geoJson(oneHundredFootGrid, {"style": oneHundredFootGridStyle}),
 	roads = require("./geojson_data/roads.js"),
 	roadsStyle = {
 		"color": "#CCD0FF",
-		"opacity": "0.9"
+		"opacity": 1
 	},
 	roadsLayer = L.geoJson(roads, {"style": roadsStyle}),
 	mileMarkers = require("./geojson_data/mile_markers.js"),
@@ -59,4 +60,4 @@ function onEachFeature(feature, layer) {
     })
 }
 
-module.exports = L.layerGroup([alignmentLayer, oneHundredFootGridLayer, roadsLayer, mileMarkersLayer, horizontalDrillingLocationsLayer])
+module.exports = L.layerGroup([oneHundredFootGridLayer, roadsLayer, mileMarkersLayer, horizontalDrillingLocationsLayer, alignmentLayer])

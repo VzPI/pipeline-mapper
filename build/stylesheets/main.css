@@ -31,6 +31,7 @@ html, body {
 #map {
 	height: 100%;
 	z-index: 0;
+	background-color: #000000;
 }
 
 #watch-position {
