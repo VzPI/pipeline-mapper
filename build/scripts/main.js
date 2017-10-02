@@ -93,19 +93,40 @@ const mapData = require("./map_data.js"),
 
 L.tileLayer("", {"maxZoom": 21}).addTo(map)
 L.control.scale({"position": "bottomright"}).addTo(map)
-mapData.addTo(map)
 
-// map.removeLayer(mapData._layers["4"]) // REMOVE THE GRATICULE FROM THE MAP ON LOADING
+// ADD THE ALIGNMENT TO THE MAP. ALL OTHER FEATURES ARE ADDED CONDITIONALLY BASED ON ZOOM LEVEL
+map.addLayer(mapData.alignment)
 
-// map.on("zoomend", () => {
-// 	const zoomLevel = map.getZoom()
+// FUNCTIONS TO CONTROL WHAT LAYERS ARE VISIBLE, DEPENDING ON ZOOM LEVEL
+map.on("zoomend", () => {
+	const zoomLevel = map.getZoom()
 
-// 	console.log(zoomLevel)
+	if (zoomLevel < 14) {
+		// REMOVE EVERYTHING EXCEPT FOR THE ALIGNMENT
+		for (let i = 0; i < Object.keys(mapData).length; i++) {
+			if (Object.keys(mapData)[i] !== "alignment") {
+				map.removeLayer(mapData[Object.keys(mapData)[i]])
+			}
+		}
+	} else if (zoomLevel >= 14 && zoomLevel <= 18) {
+		// ADD EVERYTHING EXPECT FOR THE ALIGNMENT (ALREADY ON THE MAP) AND ONE HUNDRED FOOT GRID
+		for (let i = 0; i < Object.keys(mapData).length; i++) {
+			if (Object.keys(mapData)[i] !== "alignment" && Object.keys(mapData)[i] !== "oneHundredFootGrid") {
+				map.addLayer(mapData[Object.keys(mapData)[i]])
+			}
+		}
 
-// 	if (zoomLevel > 18) {
-// 		map.addLayer(mapData._layers["4"])
-// 	}
-// })
+		// IF THE GRID IS ON THE MAP, REMOVE IT
+		map.removeLayer(mapData.oneHundredFootGrid)
+	} else {
+		// ADD EVERYTHING EXPECT FOR THE ALIGNMENT (ALREADY ON THE MAP)
+		for (let i = 0; i < Object.keys(mapData).length; i++) {
+			if (Object.keys(mapData)[i] !== "alignment") {
+				map.addLayer(mapData[Object.keys(mapData)[i]])
+			}
+		}
+	}
+})
 
 watchPositionButton.addEventListener("click", () => {
 	if (isWatching) {

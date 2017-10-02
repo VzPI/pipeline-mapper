@@ -48,7 +48,14 @@ const alignment = require("./geojson_data/alignment.js"),
 		"pointToLayer": (feature, latlng) => {
 			return L.circleMarker(latlng, horizontalDrillingLocationsStyle)
 		}
-	})
+	}),
+	mapData = {
+		"alignment": alignmentLayer,
+		"oneHundredFootGrid": oneHundredFootGridLayer,
+		"roads": roadsLayer,
+		"mileMarkers": mileMarkersLayer,
+		"horizontalDrillingLocations": horizontalDrillingLocationsLayer
+	}
 
 function whenClicked(e) {
 	this.bindPopup(`Milepost </br> ${e.target.feature.properties.Text}`).openPopup()
@@ -60,4 +67,4 @@ function onEachFeature(feature, layer) {
     })
 }
 
-module.exports = L.layerGroup([alignmentLayer, oneHundredFootGridLayer, roadsLayer, mileMarkersLayer, horizontalDrillingLocationsLayer])
+module.exports = mapData
