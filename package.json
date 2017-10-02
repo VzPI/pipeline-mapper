@@ -4,7 +4,8 @@
   "description": "Map/navigation tool",
   "main": "index.js",
   "scripts": {
-    "bundle": "browserify build/scripts/main.js -o public/scripts/bundle.js && npm run concat-css",
+    "bundle": "npm run browserify && npm run concat-css",
+    "browserify": "browserify build/scripts/main.js -o public/scripts/bundle.js",
     "concat-css": "concat -o public/stylesheets/bundle.css \"node_modules/bootstrap/dist/css/bootstrap.css\" \"node_modules/leaflet/dist/leaflet.css\" \"node_modules/leaflet-pulse-icon/dist/L.Icon.Pulse.css\" \"build/stylesheets/main.css\"",
     "uglify": "uglifyjs public/scripts/bundle.js -o public/scripts/bundle.min.js -c && uglifycss public/stylesheets/bundle.css > public/stylesheets/bundle.min.css",
     "cache": "appcache-manifest \"public/index.html\" \"public/scripts/bundle.min.js\" \"public/stylesheets/bundle.min.css\" -o public/app.cache",
