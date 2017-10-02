@@ -95,6 +95,18 @@ L.tileLayer("", {"maxZoom": 21}).addTo(map)
 L.control.scale({"position": "bottomright"}).addTo(map)
 mapData.addTo(map)
 
+// map.removeLayer(mapData._layers["4"]) // REMOVE THE GRATICULE FROM THE MAP ON LOADING
+
+// map.on("zoomend", () => {
+// 	const zoomLevel = map.getZoom()
+
+// 	console.log(zoomLevel)
+
+// 	if (zoomLevel > 18) {
+// 		map.addLayer(mapData._layers["4"])
+// 	}
+// })
+
 watchPositionButton.addEventListener("click", () => {
 	if (isWatching) {
 		setWatch()

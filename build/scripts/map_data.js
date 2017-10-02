@@ -60,4 +60,4 @@ function onEachFeature(feature, layer) {
     })
 }
 
-module.exports = L.layerGroup([oneHundredFootGridLayer, roadsLayer, mileMarkersLayer, horizontalDrillingLocationsLayer, alignmentLayer])
+module.exports = L.layerGroup([alignmentLayer, oneHundredFootGridLayer, roadsLayer, mileMarkersLayer, horizontalDrillingLocationsLayer])
