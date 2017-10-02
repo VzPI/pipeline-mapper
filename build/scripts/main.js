@@ -94,7 +94,11 @@ const mapData = require("./map_data.js"),
 		watchPositionButton.childNodes[1].innerHTML = "Watching..."
 	}
 
-L.tileLayer("", {"maxZoom": 21}).addTo(map)
+L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png", {
+	"maxZoom": 21,
+	"minZoom": 11,
+	"errorTileUrl": "" // IN THE EVENT OF A MISSING TILE, LOAD NOTHING, WHICH WILL RENDER AS BLACK
+}).addTo(map)
 L.control.scale({"position": "bottomright"}).addTo(map)
 
 // ADD THE ALIGNMENT TO THE MAP. ALL OTHER FEATURES ARE ADDED CONDITIONALLY BASED ON ZOOM LEVEL
