@@ -14,8 +14,8 @@
     "ssl-proxy": "local-ssl-proxy --source 3001 --target 3000",
     "lint": "eslint ./build/scripts/*.js ./*.js || exit 0",
     "postinstall": "npm run bundle && npm run uglify && npm run generate-cache:prod",
-    "generate-cache:dev": "appcache-manifest \"public/index.html\" \"public/scripts/bundle.min.js\" \"public/stylesheets/bundle.min.css\" --network-star --stamp -w -o public/appcache.manifest",
-    "generate-cache:prod": "appcache-manifest \"public/index.html\" \"public/scripts/bundle.min.js\" \"public/stylesheets/bundle.min.css\" --network-star --stamp -o public/appcache.manifest"
+    "generate-cache:dev": "appcache-manifest \"public/scripts/bundle.min.js\" \"public/stylesheets/bundle.min.css\" --network-star --stamp -w -o public/appcache.manifest",
+    "generate-cache:prod": "appcache-manifest \"public/scripts/bundle.min.js\" \"public/stylesheets/bundle.min.css\" --network-star --stamp -o public/appcache.manifest"
   },
   "repository": {
     "type": "git",
