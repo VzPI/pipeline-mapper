@@ -9,11 +9,11 @@
     "concat-css": "concat -o public/stylesheets/bundle.css \"node_modules/bootstrap/dist/css/bootstrap.css\" \"node_modules/leaflet/dist/leaflet.css\" \"node_modules/leaflet-pulse-icon/dist/L.Icon.Pulse.css\" \"build/stylesheets/main.css\"",
     "uglify": "uglifyjs public/scripts/bundle.js -o public/scripts/bundle.min.js -c && uglifycss public/stylesheets/bundle.css > public/stylesheets/bundle.min.css",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:dev": "npm run lint && npm run bundle && npm run uglify && concurrently \"npm run ssl-proxy\" \"npm run generate-cache:dev\" \"nodemon\"",
+    "start:dev": "npm run lint && npm run bundle && npm run uglify && concurrently \"npm run ssl-proxy\" \"nodemon\"",
     "start:prod": "node index.js",
     "ssl-proxy": "local-ssl-proxy --source 3001 --target 3000",
     "lint": "eslint ./build/scripts/*.js ./*.js || exit 0",
-    "postinstall": "npm run bundle && npm run uglify && npm run generate-cache:prod",
+    "postinstall": "npm run bundle && npm run uglify",
     "generate-cache:dev": "appcache-manifest \"public/index.html\" \"public/scripts/bundle.min.js\" \"public/stylesheets/bundle.min.css\" --network-star --stamp -w -o public/appcache.manifest",
     "generate-cache:prod": "appcache-manifest \"public/index.html\" \"public/scripts/bundle.min.js\" \"public/stylesheets/bundle.min.css\" --network-star --stamp -o public/appcache.manifest"
   },
