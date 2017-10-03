@@ -1,8 +1,0 @@
-CACHE MANIFEST
-/index.html
-/scripts/bundle.min.js
-/stylesheets/bundle.min.css
-https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png
-
-NETWORK:
-*
