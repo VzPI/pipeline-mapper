@@ -7,7 +7,18 @@ let marker,
 	isWatching = false, // USED TO DETERMINE WHETHER OR NOT GEOLOCATION IS CURRENTLY RUNNING
 	firstWatch = true // WATCH POSITION WILL RETURN SUCCESS OVER AND OVER - USE THIS VARIABLE TO MAKE SURE VIEW AND ZOOM ARE ONLY SET THE FIRST PASS
 const mapData = require("./map_data.js"),
-	map = L.map("map", {"zoomControl": false}).setView([41.384660, -74.473034], 12),
+	tileBounds = [ // RESTRICT THE MAP TILES TO THE ALIGNMENT AREA
+		[41.480935, -74.586308], // TOP-LEFT CORNER OF THE LOADED MAP TILES
+		[41.293602, -74.311077] // BOTTOM-RIGHT CORNER OF THE LOADED MAP TILES
+	],
+	// mapBounds = [ // RESTRICT THE MAP VIEW TO THE ALIGNMENT AREA
+	// 	[41.465570, -74.562416],
+	// 	[41.300930, -74.322078]
+	// ],
+	map = L.map("map", {
+		// "maxBounds": mapBounds,
+		"zoomControl": false
+	}).setView([41.371146, -74.484966], 12),
 	icon = L.icon.pulse({
 		"iconSize": [15, 15],
 		"color": "#FFFF49"
@@ -95,6 +106,7 @@ const mapData = require("./map_data.js"),
 	}
 
 L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png", {
+	"bounds": tileBounds,
 	"maxZoom": 21,
 	"minZoom": 11,
 	"errorTileUrl": "" // IN THE EVENT OF A MISSING TILE, LOAD NOTHING, WHICH WILL RENDER AS BLACK
