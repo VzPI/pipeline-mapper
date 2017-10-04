@@ -15,10 +15,13 @@ const alignment = require("./geojson_data/alignment.js"),
 	oneHundredFootGridLayer = L.geoJson(oneHundredFootGrid, {"style": oneHundredFootGridStyle}),
 	roads = require("./geojson_data/roads.js"),
 	roadsStyle = {
-		"color": "#CCD0FF",
-		"opacity": 1
+		"color": "#FFFFFF",
+		"opacity": 0.5
 	},
-	roadsLayer = L.geoJson(roads, {"style": roadsStyle}),
+	roadsLayer = L.geoJson(roads, {
+		"style": roadsStyle,
+		"onEachFeature": onEachFeature
+	}),
 	mileMarkers = require("./geojson_data/mile_markers.js"),
 	mileMarkersStyle = {
 		"radius": 8,
@@ -58,10 +61,14 @@ const alignment = require("./geojson_data/alignment.js"),
 	}
 
 function whenClicked(e) {
-	this.bindPopup(`Milepost </br> ${e.target.feature.properties.Text}`).openPopup()
+	if (e.target.feature.properties.Text) {
+		return this.bindPopup(`Milepost </br> ${e.target.feature.properties.Text}`).openPopup()
+	}
+
+	return this.bindPopup(`Street name: </br> ${e.target.feature.properties.StreetName}`).openPopup()
 }
 
-function onEachFeature(feature, layer) {
+function onEachFeature(_feature, layer) {
     layer.on({
         "click": whenClicked
     })
