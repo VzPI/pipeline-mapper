@@ -1,6 +1,7 @@
 // THIS IS OUR CORE JS FILE, WHICH IS BUNDLED TO public/scripts/bundle.js
 require("leaflet")
 require("leaflet-pulse-icon")
+
 let marker,
 	radius,
 	watchPosition,
@@ -24,6 +25,7 @@ const mapData = require("./map_data.js"),
 		"color": "#FFFF49"
 	}),
 	watchPositionButton = document.getElementById("watch-position"),
+	// CANCEL THE CURRENT WATCHING
 	clearWatch = (watchPosition) => {
 		if (marker && radius) {
 			map.removeLayer(marker)
@@ -32,6 +34,7 @@ const mapData = require("./map_data.js"),
 
 		return navigator.geolocation.clearWatch(watchPosition)
 	},
+	// REDRAW THE MARKER AND ACCURACY RADIUS EVERY TIME watchPosition() RETURNS A NEW LOCATION
 	updateMarkerAndRadius = (latitude, longitude, accuracy) => {
 		if (marker && radius) {
 			map.removeLayer(marker)
@@ -45,6 +48,7 @@ const mapData = require("./map_data.js"),
 
 		return false
 	},
+	// watchPosition SUCCESS CALLBACK
 	success = (position) => {
 		const latitude = position.coords.latitude,
 			longitude = position.coords.longitude,
@@ -58,6 +62,7 @@ const mapData = require("./map_data.js"),
 		firstWatch = false
 		return updateMarkerAndRadius(latitude, longitude, accuracy)
 	},
+	// watchPosition() ERROR CALLBACK
 	error = (err) => {
 		// THERE SEEMS TO BE A BUG WHERE CALLING clearWatch() CONTINUES TO RUN watchPosition()
 		// UNTIL A TIMEOUT ERROR OCCURS, IF success IS NOT CALLED.
@@ -76,10 +81,10 @@ const mapData = require("./map_data.js"),
 			return alert(`Error ${err.code}: ${message}`)
 		}
 
-		// QUIETLY RETURN IN SITUATIONS WHERE WATCHING MAY HAVE BEEN CANCELLED BEFORE
-		// success CALLBACK IS RETURNED
+		// QUIETLY RETURN IN SITUATIONS WHERE WATCHING HAS BEEN CANCELLED BY clearWatch()
 		return false
 	},
+	// SET UP watchPosition
 	watch = () => {
 		watchPosition = navigator.geolocation.watchPosition(success, error, {
 			"maximumAge": 0, // DO NOT USE A CACHED POSITION, RETRIEVE CURRENT REAL POSITION
@@ -105,12 +110,14 @@ const mapData = require("./map_data.js"),
 		watchPositionButton.childNodes[1].innerHTML = "Watching..."
 	}
 
+// OUR MAPTILES
 L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png", {
 	"bounds": tileBounds,
 	"maxZoom": 21,
 	"minZoom": 11,
-	"errorTileUrl": "" // IN THE EVENT OF A MISSING TILE, LOAD NOTHING, WHICH WILL RENDER AS BLACK
+	"errorTileUrl": "" // IN THE EVENT OF A MISSING TILE OR NO CONNECTION, LOAD NOTHING, WHICH WILL RENDER AS BLACK
 }).addTo(map)
+// SCALE BAR
 L.control.scale({"position": "bottomright"}).addTo(map)
 
 // ADD THE ALIGNMENT TO THE MAP. ALL OTHER FEATURES ARE ADDED CONDITIONALLY BASED ON ZOOM LEVEL
@@ -147,6 +154,7 @@ map.on("zoomend", () => {
 	}
 })
 
+// ADD CLICK HANDLER TO THE BUTTON
 watchPositionButton.addEventListener("click", () => {
 	if (isWatching) {
 		setWatch()
