@@ -44,8 +44,8 @@ When running on a local development machine on a wifi network, you can test this
 
 This app is currently deployed to Heroku and uses a Heroku pipeline for the deployment process, meaning that the app is pushed to a 'staging' release which can then be promoted to production via the Heroku CLI or dashboard. Installation of the Heroku command line tools is strongly recommended - https://devcenter.heroku.com/articles/heroku-cli
 
-- Set up the staging remote with `$ git remote add heroku-staging https://git.heroku.com/aqueous-mesa-70372.git`
-- Deploy the staging release by running `$ git push heroku-staging master` - the staging release will be accessible at https://aqueous-mesa-70372.herokuapp.com/.
+- Set up the staging remote with `$ git remote add staging https://git.heroku.com/aqueous-mesa-70372.git`
+- Deploy the staging release by running `$ git push staging master` - the staging release will be accessible at https://aqueous-mesa-70372.herokuapp.com/.
 - When the staging release has been reviewed and approved for production release, promote the app via the Heroku dashboard, or by running `$ heroku pipelines:promote -r staging`.
 - The production release will be accessible at https://vlp-mapper.herokuapp.com/.
 
