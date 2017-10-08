@@ -57,13 +57,28 @@ const alignment = require("./geojson_data/alignment.js"),
 			return L.circleMarker(latlng, horizontalDrillingLocationsStyle)
 		}
 	}),
+	// TEST DATA LAYERS...
+	testAlignment = require("./geojson_data/test_alignment.js"),
+	testAlignmentLayer = L.geoJson(testAlignment, {"style": alignmentStyle}),
+	testGrid = require("./geojson_data/test_grid.js"),
+	testGridLayer = L.geoJson(testGrid, {"style": oneHundredFootGridStyle}),
+	testMarkers = require("./geojson_data/test_markers.js"),
+	testMarkersLayer = L.geoJson(testMarkers, {
+		"pointToLayer": (feature, latlng) => {
+			return L.circleMarker(latlng, mileMarkersStyle)
+		},
+		"onEachFeature": onEachFeature
+	}),
 	// THE EXPORTED DATA OBJECT
 	mapData = {
-		"alignment": alignmentLayer,
-		"oneHundredFootGrid": oneHundredFootGridLayer,
-		"roads": roadsLayer,
-		"mileMarkers": mileMarkersLayer,
-		"horizontalDrillingLocations": horizontalDrillingLocationsLayer
+		// "alignment": alignmentLayer,
+		// "oneHundredFootGrid": oneHundredFootGridLayer,
+		// "roads": roadsLayer,
+		// "mileMarkers": mileMarkersLayer,
+		// "horizontalDrillingLocations": horizontalDrillingLocationsLayer
+		"alignment": testAlignmentLayer,
+		"oneHundredFootGrid": testGridLayer,
+		"mileMarkers": testMarkersLayer
 	}
 
 // FUNCTION CALLED ON CLICK

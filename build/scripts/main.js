@@ -12,12 +12,7 @@ const mapData = require("./map_data.js"),
 		[41.480935, -74.586308], // TOP-LEFT CORNER OF THE LOADED MAP TILES
 		[41.293602, -74.311077] // BOTTOM-RIGHT CORNER OF THE LOADED MAP TILES
 	],
-	// mapBounds = [ // RESTRICT THE MAP VIEW TO THE ALIGNMENT AREA
-	// 	[41.465570, -74.562416],
-	// 	[41.300930, -74.322078]
-	// ],
 	map = L.map("map", {
-		// "maxBounds": mapBounds,
 		"zoomControl": false
 	}).setView([41.371146, -74.484966], 12),
 	icon = L.icon.pulse({
