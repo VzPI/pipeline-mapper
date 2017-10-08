@@ -1,3 +1,21 @@
+VLP MAPPER - https://vlp-mapper.herokuapp.com/
+
+############
+# Overview #
+############
+
+The VLP Mapper is designed to aid field research volunteers by providing them with a streamlined custom navigation tool.
+Its primary features are a map with relevant geometries and a button that allows a user to 'watch' their location on the map to determine their proximity to those features.
+
+The map features include:
+- proposed pipeline alignment
+- horizontal drilling locations
+- milepost markers (on which a user may click to obtain information about the feature)
+- roads within a 500' buffer of the alignment (on which a user may click to obtain information about the feature)
+- a 100' X 100' grid extending to a 500' buffer around the alignment, to aid in navigation as the user moves.
+
+The app utilizes the HTML5 application cache feature to allow for offline-use (see the Offline Functionality section below).
+
 This app has been built in a NodeJS/ExpressJS framework. It utilizes the JavaScript geolocation API to access a user's current location and display it in a Leaflet map container.
 
 ##########################
@@ -8,7 +26,7 @@ This app has been built in a NodeJS/ExpressJS framework. It utilizes the JavaScr
 
 - To start the app, run `$ npm start` - in local development, the app will run on port 3000.
 	- in local development, this app has been set up to use Nodemon for 'hot' reloading and ESLint for linting. Linting will run automatically on every server restart, and can be run independently with the command `$ npm run lint`.
-	- this app has been set up with an ssl-proxy, and also runs with https on port 3001.
+	- this app has been set up with an SSL proxy in development - it runs simultaneously with HTTP on port 3000 and HTTPS on port 3001.
 
 ###########
 # Testing #
@@ -24,9 +42,12 @@ When running on a local development machine on a wifi network, you can test this
 # Deployment #
 ##############
 
-This app is currently deployed to Heroku. To deploy, set up the Heroku remote and run
+This app is currently deployed to Heroku and uses a Heroku pipeline for the deployment process, meaning that the app is pushed to a 'staging' release which can then be promoted to production via the Heroku CLI or dashboard. Installation of the Heroku command line tools is strongly recommended - https://devcenter.heroku.com/articles/heroku-cli
 
-`$ git push heroku master`
+- Set up the staging remote with `$ git remote add heroku-staging https://git.heroku.com/aqueous-mesa-70372.git`
+- Deploy the staging release by running `$ git push heroku-staging master` - the staging release will be accessible at https://aqueous-mesa-70372.herokuapp.com/.
+- When the staging release has been reviewed and approved for production release, promote the app via the Heroku dashboard, or by running `$ heroku pipelines:promote -r staging`.
+- The production release will be accessible at https://vlp-mapper.herokuapp.com/.
 
 ################
 # Node Scripts #
@@ -47,6 +68,21 @@ The package.json file contains a number of scripts intended to improve this app'
 - "generate-cache:dev" - this produces the appcache.manifest for local use. This script is nearly identical to the production script, with the exception of the -w flag, which sets up watch mode - the appcache.manifest will refresh every time the cached files change. See the 'Offline Functionality' section for additional info about the app cache.
 - "generate-cache:prod" - this produces the appcache.manifest for production use, called by the "postinstall" script. See the 'Offline Functionality' section for additional info about the app cache.
 
+#############
+# Field Use #
+#############
+
+Before taking this app out in the field, users should first 'save' the app by visiting https://vlp-mapper.herokuapp.com/ on their device when they have network service,
+and users should test the app at home or in a safe location before taking it into the field. Click the button labeled 'Watch' - after a few seconds, a yellow pulsing dot should appear on the screen - if the dot appears, the app is working perfectly.
+
+The VLP Mapper is intended for use on iOS and Android mobile devices. In order to run, users must permit location services for the browser they intend to use in the field. If the user is ever prompted that the app is requesting their location, they must allow it.
+
+The app interface is designed to be as simple as possible - clicking the blue 'Watch' button will begin the process of searching for a user's location and adding it to the map as a pulsing yellow dot (the user) surrounded by a transparent blue circle (accuracy);
+the blue button will turn orange. To stop watching a user's location, click the button again.
+As a user moves, the app will continuously update their location, so a user can observe their progress on the map.
+The primary map feature is the pipeline alignment - other features are added and removed at different map zoom levels.
+
+
 #########################
 # Offline Functionality #
 #########################
@@ -58,7 +94,13 @@ When a user first visits the app's URL, three critical resources are cached:
 	- scripts/bundle.min.js
 	- stylesheets/bundle.min.css
 
-These are all of the assets that a user needs to run the application. The only feature that is not cached is the set of map tiles which, while helping to provide context to the map area, are not a necessity. When maptiles are not available, the map container will default to a black background, but the core map features - alignment, 100' grid, mile markers, roads, and drilling locations - will still be visible and the location functionality will still work.
+These are all of the assets that a user needs to run the application.
+The only feature that is not cached is the set of map tiles which, while helping to provide context to the map area, are not a necessity.
+When maptiles are not available, the map container will default to a black background, but the core map features - alignment, 100' grid, mile markers, roads, and drilling locations - will still be visible and the location functionality will still work.
+
+After the user first visits the app's url, the app cache is set up and the targeted resources are added to it - a user can test that the assets have been added by switching their mobile device to 'airplane' mode and refreshing the page - the geometry should still load, but some or all map tiles will be missing.
+
+A user can clear their application cache by clearing the browser history.
 
 NOTE - the HTML application cache feature is deprecated and slated for eventual removal from browsers. However, it is still widely supported, and the replacement technology (JavaScript service workers) is still considered experimental and not supported on all browsers.
 
