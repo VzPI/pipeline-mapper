@@ -31,6 +31,7 @@ const mapData = require("./map_data.js"),
 	},
 	// REDRAW THE MARKER AND ACCURACY RADIUS EVERY TIME watchPosition() RETURNS A NEW LOCATION
 	updateMarkerAndRadius = (latitude, longitude, accuracy) => {
+		// UPDATE THE MARKER AND RADIUS POSITION
 		if (marker && radius) {
 			map.removeLayer(marker)
 			map.removeLayer(radius)
@@ -40,6 +41,9 @@ const mapData = require("./map_data.js"),
 			marker = L.marker([latitude, longitude], {"icon": icon}).addTo(map)
 			radius = L.circle([latitude, longitude], accuracy).addTo(map)
 		}
+
+		// CENTER THE MAP ON THE MARKER
+		map.setView(new L.LatLng(latitude, longitude))
 
 		return false
 	},
