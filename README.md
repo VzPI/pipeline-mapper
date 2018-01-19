@@ -1,7 +1,7 @@
 # Pipeline Mapper
 
 ## Overview
-The VLP Mapper is designed to aid field research volunteers by providing them with a simple, streamlined, custom navigation tool for a GPS-enabled mobile device. This app has been built in a NodeJS/ExpressJS framework.
+The pipeline-mapper is designed to aid field research volunteers by providing them with a simple, streamlined, custom navigation tool for a GPS-enabled mobile device. This app has been built in a NodeJS/ExpressJS framework.
 
 The app, as presented here, is configured for use with a pipeline project in upstate New York, but will need to be configured to meet the needs of your field team, should you choose to clone and deploy this repo - see the 'Localization' section for more details on how to tailor this app to meet your needs.
 
