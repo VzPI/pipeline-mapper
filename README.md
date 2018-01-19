@@ -1,4 +1,5 @@
 # Pipeline Mapper
+A demo of this app can be viewed at https://pipeline-mapper.herokuapp.com/
 
 ## Overview
 The pipeline-mapper is designed to aid field research volunteers by providing them with a simple, streamlined, custom navigation tool for a GPS-enabled mobile device. This app has been built in a NodeJS/ExpressJS framework.
