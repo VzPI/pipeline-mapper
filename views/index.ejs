@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html manifest="appcache.manifest">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+	<title>Pipeline Mapper</title>
+	<!-- IN DEVELOPMENT, DON'T USE THE MINIFIED STYLESHEET -->
+	<% if (nodeEnv === "development") { %>
+		<% include ./partials/dev-stylesheet %>
+	<% } else { %>
+		<% include ./partials/prod-stylesheet %>
+	<% } %>
+</head>
+<body>
+	<div id="map"></div>
+	<button class="btn btn-info col-xs-5" id="watch-position">
+		<span class="button-text">Watch</span>
+	</button>
+	<!-- IN DEVELOPMENT, DON'T USE THE MINIFIED/UGLIFIED SCRIPT -->
+	<% if (nodeEnv === "development") { %>
+		<% include ./partials/dev-script %>
+	<% } else { %>
+		<% include ./partials/prod-script %>
+	<% } %>
+</body>

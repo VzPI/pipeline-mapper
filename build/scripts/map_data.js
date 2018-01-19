@@ -1,3 +1,4 @@
+// LOCALIZATION DEPENDENCY
 // COLLECT THE GEOJSONS FROM THE LIBRARY, STYLE THEM, AND PASS THEM TO main.js TO BE ADDED TO THE MAP
 // THE MAIN PIPELINE ALIGNMENT
 const alignment = require("./geojson_data/alignment.js"),
@@ -57,18 +58,6 @@ const alignment = require("./geojson_data/alignment.js"),
 			return L.circleMarker(latlng, horizontalDrillingLocationsStyle)
 		}
 	}),
-	// // TEST DATA LAYERS...
-	// testAlignment = require("./geojson_data/test_alignment.js"),
-	// testAlignmentLayer = L.geoJson(testAlignment, {"style": alignmentStyle}),
-	// testGrid = require("./geojson_data/test_grid.js"),
-	// testGridLayer = L.geoJson(testGrid, {"style": oneHundredFootGridStyle}),
-	// testMarkers = require("./geojson_data/test_markers.js"),
-	// testMarkersLayer = L.geoJson(testMarkers, {
-	// 	"pointToLayer": (feature, latlng) => {
-	// 		return L.circleMarker(latlng, mileMarkersStyle)
-	// 	},
-	// 	"onEachFeature": onEachFeature
-	// }),
 	// THE EXPORTED DATA OBJECT
 	mapData = {
 		// REAL DATA BELOW - COMMENT OUT WHEN TESTING, IF NEEDED
@@ -77,12 +66,9 @@ const alignment = require("./geojson_data/alignment.js"),
 		"roads": roadsLayer,
 		"mileMarkers": mileMarkersLayer,
 		"horizontalDrillingLocations": horizontalDrillingLocationsLayer
-		// // TEST DATA BELOW - COMMENT OUT WHEN GOING TO FULL PRODUCTION
-		// "alignment": testAlignmentLayer,
-		// "oneHundredFootGrid": testGridLayer,
-		// "mileMarkers": testMarkersLayer
 	}
 
+// LOCALIZATION DEPENDENCY
 // FUNCTION CALLED ON CLICK
 function whenClicked(e) {
 	// MILEPOST MARKERS HAVE A Text ATTRIBUTE

@@ -5,7 +5,7 @@
 		"public/stylesheets/bundle.css",
 		"public/stylesheets/bundle.min.css"
 	],
-	"ext": "js html css",
+	"ext": "js html css ejs",
 	"events": {
 		"exit": "npm run lint && npm run bundle && npm run uglify"
 	}
